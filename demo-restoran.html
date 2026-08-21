@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>KitaRasa · Demo Restoran</title>
+    <title>KitaRasa · Fine Dining</title>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet" />
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
     <style>
-        /* ===== RESET & VARIABLES ===== */
+        /* ============================================
+                   RESET & VARIABLES (PREMIUM)
+                ============================================ */
         * {
             margin: 0;
             padding: 0;
@@ -22,17 +24,22 @@
         }
 
         :root {
-            --bg-dark: #0a0a0a;
-            --bg-card: #141414;
-            --gold: #d4a373;
-            --gold-light: #e9c9a8;
-            --gold-glow: rgba(212, 163, 115, 0.2);
-            --text-light: #f5f0eb;
-            --text-muted: #b0a8a0;
-            --border-gold: rgba(212, 163, 115, 0.3);
-            --radius: 16px;
-            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            --shadow-card: 0 20px 40px -12px rgba(0, 0, 0, 0.6);
+            --bg-primary: #0c0c0c;
+            --bg-secondary: #151515;
+            --bg-card: #1c1c1c;
+            --gold: #d4af37;
+            --gold-light: #f0d080;
+            --gold-dark: #b8962e;
+            --gold-glow: rgba(212, 175, 55, 0.15);
+            --text-light: #f8f4ef;
+            --text-muted: #b5aea7;
+            --text-dark: #2a2a2a;
+            --border-gold: rgba(212, 175, 55, 0.2);
+            --shadow-card: 0 30px 60px -20px rgba(0, 0, 0, 0.8);
+            --shadow-gold: 0 10px 40px rgba(212, 175, 55, 0.08);
+            --radius-lg: 24px;
+            --radius-md: 16px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         html {
@@ -41,9 +48,10 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg-dark);
+            background: var(--bg-primary);
             color: var(--text-light);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -53,41 +61,51 @@
         }
 
         section {
-            padding: 80px 0;
+            padding: 100px 0;
         }
 
-        /* ===== TYPOGRAPHY ===== */
+        /* ============================================
+                   TYPOGRAPHY
+                ============================================ */
         .heading-serif {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
             letter-spacing: -0.02em;
         }
 
+        .heading-serif-italic {
+            font-family: 'Playfair Display', serif;
+            font-weight: 400;
+            font-style: italic;
+        }
+
         .section-tag {
             display: inline-block;
             font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--gold);
             border: 1px solid var(--border-gold);
-            padding: 0.3rem 1.2rem;
+            padding: 0.4rem 1.4rem;
             border-radius: 40px;
             margin-bottom: 1rem;
-            background: rgba(212, 163, 115, 0.06);
+            background: rgba(212, 175, 55, 0.04);
+            backdrop-filter: blur(4px);
         }
 
         .section-title {
-            font-size: clamp(2rem, 4.5vw, 3.2rem);
-            line-height: 1.15;
+            font-size: clamp(2.2rem, 5vw, 3.6rem);
+            line-height: 1.1;
             margin-bottom: 0.75rem;
         }
 
         .section-subtitle {
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto 2.5rem auto;
+            font-weight: 300;
         }
 
         .text-center {
@@ -98,123 +116,163 @@
             color: var(--gold);
         }
 
-        /* ===== BUTTONS ===== */
+        .gold-gradient {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* ============================================
+                   BUTTONS (Premium)
+                ============================================ */
         .btn-primary {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: var(--gold);
-            color: #0a0a0a;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: var(--text-dark);
             font-weight: 700;
             font-size: 0.95rem;
-            padding: 0.85rem 2.4rem;
+            padding: 0.9rem 2.6rem;
             border-radius: 60px;
             border: none;
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
-            box-shadow: 0 4px 20px rgba(212, 163, 115, 0.25);
+            box-shadow: 0 4px 30px rgba(212, 175, 55, 0.25);
+            letter-spacing: 0.01em;
         }
 
         .btn-primary:hover {
-            background: var(--gold-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(212, 163, 115, 0.35);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 40px rgba(212, 175, 55, 0.4);
         }
 
         .btn-outline {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             background: transparent;
             color: var(--text-light);
             font-weight: 600;
             font-size: 0.95rem;
-            padding: 0.85rem 2.4rem;
+            padding: 0.9rem 2.6rem;
             border-radius: 60px;
             border: 1.5px solid var(--border-gold);
             cursor: pointer;
             transition: var(--transition);
             text-decoration: none;
+            backdrop-filter: blur(4px);
         }
 
         .btn-outline:hover {
-            background: var(--gold);
-            color: #0a0a0a;
+            background: rgba(212, 175, 55, 0.08);
             border-color: var(--gold);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.05);
         }
 
         .btn-small {
-            padding: 0.5rem 1.4rem;
+            padding: 0.5rem 1.6rem;
             font-size: 0.8rem;
         }
 
-        /* ===== NAVBAR (kecil, khusus demo) ===== */
-        .navbar-demo {
+        /* ============================================
+                   NAVBAR
+                ============================================ */
+        .navbar-premium {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
             z-index: 999;
-            padding: 0.8rem 0;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid rgba(212, 163, 115, 0.08);
+            padding: 1rem 0;
+            background: rgba(12, 12, 12, 0.7);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+            transition: var(--transition);
         }
 
-        .navbar-demo .container {
+        .navbar-premium.scrolled {
+            background: rgba(12, 12, 12, 0.92);
+            border-bottom-color: rgba(212, 175, 55, 0.12);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .navbar-premium .container {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
-        .navbar-demo .logo {
+        .navbar-premium .logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--gold);
             text-decoration: none;
+            letter-spacing: -0.02em;
         }
 
-        .navbar-demo .logo span {
+        .navbar-premium .logo span {
             color: var(--text-light);
             font-weight: 300;
         }
 
-        .navbar-demo .nav-links {
+        .navbar-premium .nav-links {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            gap: 2.5rem;
             list-style: none;
         }
 
-        .navbar-demo .nav-links a {
+        .navbar-premium .nav-links a {
             color: var(--text-muted);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
             transition: var(--transition);
+            position: relative;
         }
 
-        .navbar-demo .nav-links a:hover {
+        .navbar-premium .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+
+        .navbar-premium .nav-links a:hover {
             color: var(--text-light);
         }
+        .navbar-premium .nav-links a:hover::after {
+            width: 100%;
+        }
 
-        .navbar-demo .nav-links .btn-nav {
-            background: var(--gold);
-            color: #0a0a0a;
-            padding: 0.4rem 1.4rem;
+        .navbar-premium .nav-links .btn-nav {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: var(--text-dark);
+            padding: 0.5rem 1.8rem;
             border-radius: 40px;
             font-weight: 700;
+            border: none;
         }
 
-        .navbar-demo .nav-links .btn-nav:hover {
-            background: var(--gold-light);
+        .navbar-premium .nav-links .btn-nav::after {
+            display: none;
         }
 
-        /* Hamburger (mobile) */
-        .nav-toggle-demo {
+        .navbar-premium .nav-links .btn-nav:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hamburger */
+        .nav-toggle-premium {
             display: none;
             flex-direction: column;
             gap: 5px;
@@ -224,390 +282,491 @@
             padding: 4px;
         }
 
-        .nav-toggle-demo span {
+        .nav-toggle-premium span {
             display: block;
-            width: 26px;
+            width: 28px;
             height: 2px;
             background: var(--text-light);
             border-radius: 4px;
             transition: var(--transition);
         }
 
-        /* ===== HERO ===== */
-        .hero-resto {
+        /* ============================================
+                   HERO (Premium)
+                ============================================ */
+        .hero-premium {
             min-height: 100vh;
             display: flex;
             align-items: center;
             background:
-                radial-gradient(ellipse at 20% 30%, rgba(212, 163, 115, 0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 70%, rgba(212, 163, 115, 0.04) 0%, transparent 50%),
-                var(--bg-dark);
+                radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.06) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 70%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                var(--bg-primary);
             padding-top: 80px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero-resto::before {
+        .hero-premium::before {
             content: '';
             position: absolute;
-            top: -20%;
+            top: -30%;
             right: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(212, 163, 115, 0.03) 0%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.03) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
         }
 
-        .hero-resto-grid {
+        .hero-premium-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
+            gap: 5rem;
             align-items: center;
             position: relative;
             z-index: 2;
         }
 
-        .hero-resto-content {
-            max-width: 600px;
+        .hero-premium-content {
+            max-width: 620px;
         }
 
-        .hero-resto-content .badge {
-            display: inline-block;
-            background: rgba(212, 163, 115, 0.1);
+        .hero-premium-content .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(212, 175, 55, 0.06);
             border: 1px solid var(--border-gold);
-            padding: 0.3rem 1.2rem;
+            padding: 0.3rem 1.2rem 0.3rem 0.8rem;
             border-radius: 40px;
             font-size: 0.7rem;
             font-weight: 600;
-            letter-spacing: 0.12em;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 1.5rem;
+            backdrop-filter: blur(4px);
         }
 
-        .hero-resto-content h1 {
-            font-size: clamp(2.8rem, 6vw, 4.5rem);
+        .hero-premium-content .badge i {
+            font-size: 0.6rem;
+        }
+
+        .hero-premium-content h1 {
+            font-size: clamp(3rem, 7vw, 5rem);
             line-height: 1.05;
             margin-bottom: 1.5rem;
         }
 
-        .hero-resto-content h1 .highlight {
-            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+        .hero-premium-content h1 .highlight {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-resto-content p {
-            font-size: 1.1rem;
+        .hero-premium-content p {
+            font-size: 1.15rem;
             color: var(--text-muted);
-            max-width: 440px;
-            margin-bottom: 2rem;
+            max-width: 480px;
+            margin-bottom: 2.5rem;
             line-height: 1.8;
+            font-weight: 300;
         }
 
-        .hero-resto-content .hero-buttons {
+        .hero-premium-content .hero-buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .hero-resto-image {
+        .hero-premium-image {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .hero-resto-image .image-placeholder {
+        .hero-premium-image .image-frame {
             width: 100%;
-            max-width: 480px;
+            max-width: 520px;
             aspect-ratio: 4/3;
             background:
-                radial-gradient(ellipse at 30% 40%, rgba(212, 163, 115, 0.1) 0%, transparent 60%),
-                var(--bg-card);
-            border-radius: var(--radius);
+                radial-gradient(ellipse at 40% 30%, rgba(212, 175, 55, 0.08) 0%, transparent 60%),
+                var(--bg-secondary);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--border-gold);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
+            padding: 2.5rem;
             text-align: center;
             box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
         }
 
-        .hero-resto-image .image-placeholder i {
-            font-size: 4rem;
+        .hero-premium-image .image-frame::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, transparent, rgba(212, 175, 55, 0.02), transparent, rgba(212, 175, 55, 0.02), transparent);
+            animation: rotateGlow 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotateGlow {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .hero-premium-image .image-frame i {
+            font-size: 5rem;
             color: var(--gold);
-            opacity: 0.4;
+            opacity: 0.3;
             margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .hero-resto-image .image-placeholder p {
+        .hero-premium-image .image-frame p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
         }
 
-        /* ===== MENU ===== */
-        .section-menu {
-            background: var(--bg-card);
-            border-top: 1px solid rgba(212, 163, 115, 0.04);
-            border-bottom: 1px solid rgba(212, 163, 115, 0.04);
+        .hero-premium-image .image-frame .label-dish {
+            position: relative;
+            z-index: 1;
+            margin-top: 1rem;
+            background: rgba(212, 175, 55, 0.08);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            color: var(--gold);
+            border: 1px solid var(--border-gold);
         }
 
-        .menu-tabs {
+        /* ============================================
+                   MENU (Premium)
+                ============================================ */
+        .section-menu-premium {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(212, 175, 55, 0.04);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.04);
+        }
+
+        .menu-tabs-premium {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
             gap: 0.5rem;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
         }
 
-        .menu-tabs button {
+        .menu-tabs-premium button {
             background: transparent;
-            border: 1px solid rgba(212, 163, 115, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.1);
             color: var(--text-muted);
-            padding: 0.5rem 1.8rem;
+            padding: 0.5rem 2rem;
             border-radius: 40px;
             font-family: 'Inter', sans-serif;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             cursor: pointer;
             transition: var(--transition);
+            letter-spacing: 0.04em;
         }
 
-        .menu-tabs button:hover,
-        .menu-tabs button.active {
-            background: var(--gold);
-            color: #0a0a0a;
+        .menu-tabs-premium button:hover {
+            color: var(--text-light);
+            border-color: var(--border-gold);
+        }
+
+        .menu-tabs-premium button.active {
+            background: linear-gradient(135deg, var(--gold-light), var(--gold));
+            color: var(--text-dark);
             border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.2);
         }
 
-        .menu-grid {
+        .menu-grid-premium {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
         }
 
-        .menu-item-card {
-            background: var(--bg-dark);
-            border-radius: var(--radius);
-            padding: 1.8rem;
-            border: 1px solid rgba(212, 163, 115, 0.04);
+        .menu-item-premium {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.04);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
         }
 
-        .menu-item-card:hover {
+        .menu-item-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .menu-item-premium:hover::before {
+            opacity: 1;
+        }
+
+        .menu-item-premium:hover {
+            transform: translateY(-6px);
             border-color: var(--border-gold);
-            transform: translateY(-4px);
             box-shadow: var(--shadow-card);
         }
 
-        .menu-item-card .item-header {
+        .menu-item-premium .item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
             margin-bottom: 0.3rem;
         }
 
-        .menu-item-card .item-name {
+        .menu-item-premium .item-name {
             font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 1.2rem;
+            font-weight: 600;
         }
 
-        .menu-item-card .item-price {
+        .menu-item-premium .item-price {
             font-weight: 700;
             color: var(--gold);
-            font-size: 1.05rem;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            margin-left: 1rem;
         }
 
-        .menu-item-card .item-desc {
+        .menu-item-premium .item-desc {
             color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.6;
+            line-height: 1.7;
             flex-grow: 1;
+            margin: 0.3rem 0 0.8rem;
+            font-weight: 300;
         }
 
-        .menu-item-card .item-tag {
-            display: inline-block;
-            margin-top: 0.75rem;
-            font-size: 0.7rem;
+        .menu-item-premium .item-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            align-self: flex-start;
+            font-size: 0.65rem;
             font-weight: 600;
             color: var(--gold);
-            background: rgba(212, 163, 115, 0.08);
-            padding: 0.15rem 0.8rem;
+            background: rgba(212, 175, 55, 0.06);
+            padding: 0.2rem 0.8rem;
             border-radius: 40px;
-            align-self: flex-start;
+            border: 1px solid rgba(212, 175, 55, 0.08);
         }
 
-        /* ===== INFO (Lokasi & Jam) ===== */
-        .section-info {
-            background: var(--bg-dark);
+        /* ============================================
+                   INFO (Lokasi & Jam) Premium
+                ============================================ */
+        .section-info-premium {
+            background: var(--bg-primary);
         }
 
-        .info-grid {
+        .info-grid-premium {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 3rem;
         }
 
-        .info-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            border: 1px solid rgba(212, 163, 115, 0.04);
+        .info-card-premium {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 2.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.04);
             transition: var(--transition);
+            backdrop-filter: blur(4px);
         }
 
-        .info-card:hover {
+        .info-card-premium:hover {
             border-color: var(--border-gold);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow-gold);
+            transform: translateY(-4px);
         }
 
-        .info-card .card-icon {
-            font-size: 1.6rem;
+        .info-card-premium .card-icon {
+            font-size: 1.8rem;
             color: var(--gold);
             margin-bottom: 0.75rem;
-            opacity: 0.7;
+            opacity: 0.6;
         }
 
-        .info-card h3 {
+        .info-card-premium h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 0.5rem;
         }
 
-        .info-card p {
+        .info-card-premium p {
             color: var(--text-muted);
             font-size: 0.95rem;
             line-height: 1.7;
         }
 
-        .info-card .hours-grid {
+        .info-card-premium .hours-grid {
             display: grid;
             grid-template-columns: auto 1fr;
             gap: 0.25rem 1.5rem;
             margin-top: 0.5rem;
         }
 
-        .info-card .hours-grid .day {
+        .info-card-premium .hours-grid .day {
             color: var(--text-muted);
+            font-weight: 300;
         }
-        .info-card .hours-grid .time {
+        .info-card-premium .hours-grid .time {
             color: var(--text-light);
+            font-weight: 400;
         }
-        .info-card .hours-grid .time.gold {
+        .info-card-premium .hours-grid .time.gold {
             color: var(--gold);
+            font-weight: 600;
         }
 
-        /* ===== TESTIMONIAL ===== */
-        .section-testimoni {
-            background: var(--bg-card);
-            border-top: 1px solid rgba(212, 163, 115, 0.04);
-            border-bottom: 1px solid rgba(212, 163, 115, 0.04);
+        /* ============================================
+                   TESTIMONI Premium
+                ============================================ */
+        .section-testimoni-premium {
+            background: var(--bg-secondary);
+            border-top: 1px solid rgba(212, 175, 55, 0.04);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.04);
         }
 
-        .testimoni-grid {
+        .testimoni-grid-premium {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
         }
 
-        .testimoni-card {
-            background: var(--bg-dark);
-            border-radius: var(--radius);
-            padding: 2rem;
-            border: 1px solid rgba(212, 163, 115, 0.04);
+        .testimoni-card-premium {
+            background: var(--bg-card);
+            border-radius: var(--radius-md);
+            padding: 2.2rem 2rem;
+            border: 1px solid rgba(212, 175, 55, 0.04);
+            transition: var(--transition);
         }
 
-        .testimoni-card .stars {
+        .testimoni-card-premium:hover {
+            border-color: var(--border-gold);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .testimoni-card-premium .stars {
             color: var(--gold);
             letter-spacing: 2px;
             margin-bottom: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .testimoni-card blockquote {
+        .testimoni-card-premium blockquote {
             font-style: italic;
             color: var(--text-muted);
-            line-height: 1.7;
+            line-height: 1.8;
             margin-bottom: 1rem;
+            font-weight: 300;
         }
 
-        .testimoni-card .author {
+        .testimoni-card-premium .author {
             font-weight: 600;
             font-size: 0.9rem;
         }
-        .testimoni-card .author span {
+        .testimoni-card-premium .author span {
             font-weight: 400;
             color: var(--text-muted);
             font-size: 0.8rem;
         }
 
-        /* ===== RESERVASI / KONTAK ===== */
-        .section-reservasi {
-            background: var(--bg-dark);
+        /* ============================================
+                   RESERVASI Premium
+                ============================================ */
+        .section-reservasi-premium {
+            background: var(--bg-primary);
         }
 
-        .reservasi-wrap {
+        .reservasi-wrap-premium {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
             align-items: start;
         }
 
-        .reservasi-info h3 {
+        .reservasi-info-premium h3 {
             font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+            font-size: 2.2rem;
             margin-bottom: 0.5rem;
         }
 
-        .reservasi-info p {
+        .reservasi-info-premium p {
             color: var(--text-muted);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
+            font-weight: 300;
         }
 
-        .reservasi-info .detail {
+        .reservasi-info-premium .detail {
             display: flex;
             align-items: center;
             gap: 1rem;
             margin-bottom: 0.6rem;
         }
 
-        .reservasi-info .detail i {
+        .reservasi-info-premium .detail i {
             width: 24px;
             color: var(--gold);
+            font-size: 1.1rem;
         }
 
-        .reservasi-form {
-            background: var(--bg-card);
-            padding: 2.5rem;
-            border-radius: var(--radius);
-            border: 1px solid rgba(212, 163, 115, 0.04);
+        .reservasi-form-premium {
+            background: var(--bg-secondary);
+            padding: 2.8rem;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(212, 175, 55, 0.04);
         }
 
-        .reservasi-form .form-group {
+        .reservasi-form-premium .form-group {
             margin-bottom: 1.2rem;
         }
 
-        .reservasi-form label {
+        .reservasi-form-premium label {
             display: block;
             font-size: 0.8rem;
             font-weight: 600;
             color: var(--text-muted);
             margin-bottom: 0.2rem;
+            letter-spacing: 0.04em;
         }
 
-        .reservasi-form input,
-        .reservasi-form select,
-        .reservasi-form textarea {
+        .reservasi-form-premium input,
+        .reservasi-form-premium select,
+        .reservasi-form-premium textarea {
             width: 100%;
             padding: 0.8rem 1.2rem;
-            background: var(--bg-dark);
-            border: 1px solid rgba(212, 163, 115, 0.08);
+            background: var(--bg-primary);
+            border: 1px solid rgba(212, 175, 55, 0.06);
             border-radius: 12px;
             color: var(--text-light);
             font-family: 'Inter', sans-serif;
@@ -615,180 +774,91 @@
             transition: var(--transition);
         }
 
-        .reservasi-form input:focus,
-        .reservasi-form select:focus,
-        .reservasi-form textarea:focus {
+        .reservasi-form-premium input:focus,
+        .reservasi-form-premium select:focus,
+        .reservasi-form-premium textarea:focus {
             outline: none;
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(212, 163, 115, 0.1);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.06);
         }
 
-        .reservasi-form textarea {
+        .reservasi-form-premium textarea {
             min-height: 100px;
             resize: vertical;
         }
 
-        .reservasi-form .form-row {
+        .reservasi-form-premium .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        /* ===== FOOTER ===== */
-        .footer-demo {
-            padding: 3rem 0 2rem;
-            background: var(--bg-dark);
-            border-top: 1px solid rgba(212, 163, 115, 0.04);
+        .reservasi-form-premium .btn-primary {
+            width: 100%;
+            justify-content: center;
+            margin-top: 0.5rem;
+        }
+
+        #resSuccessPremium {
+            display: none;
+            margin-top: 1rem;
+            color: var(--gold);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        #resSuccessPremium.show {
+            display: block;
+        }
+
+        /* ============================================
+                   FOOTER Premium
+                ============================================ */
+        .footer-premium {
+            padding: 4rem 0 2.5rem;
+            background: var(--bg-primary);
+            border-top: 1px solid rgba(212, 175, 55, 0.04);
             text-align: center;
         }
 
-        .footer-demo .logo-foot {
+        .footer-premium .logo-foot {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--gold);
         }
 
-        .footer-demo .logo-foot span {
+        .footer-premium .logo-foot span {
             color: var(--text-muted);
             font-weight: 300;
         }
 
-        .footer-demo p {
+        .footer-premium p {
             color: var(--text-muted);
             font-size: 0.85rem;
             margin-top: 0.3rem;
+            font-weight: 300;
         }
 
-        .footer-demo .socials {
+        .footer-premium .socials {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
-            margin: 1.5rem 0;
+            gap: 1.8rem;
+            margin: 1.8rem 0 1rem;
         }
 
-        .footer-demo .socials a {
+        .footer-premium .socials a {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             transition: var(--transition);
         }
 
-        .footer-demo .socials a:hover {
+        .footer-premium .socials a:hover {
             color: var(--gold);
             transform: translateY(-3px);
         }
 
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1024px) {
-            .hero-resto-grid {
-                gap: 2.5rem;
-            }
-            .reservasi-wrap {
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .navbar-demo .nav-links {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(16px);
-                padding: 2rem 1.5rem;
-                border-radius: 0 0 var(--radius) var(--radius);
-                border: 1px solid rgba(212, 163, 115, 0.04);
-                gap: 1.2rem;
-            }
-
-            .navbar-demo .nav-links.open {
-                display: flex;
-            }
-
-            .nav-toggle-demo {
-                display: flex;
-            }
-
-            .hero-resto-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-resto-content {
-                max-width: 100%;
-            }
-            .hero-resto-content p {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-resto-content .hero-buttons {
-                justify-content: center;
-            }
-            .hero-resto-image {
-                order: -1;
-            }
-            .hero-resto-image .image-placeholder {
-                max-width: 100%;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .reservasi-wrap {
-                grid-template-columns: 1fr;
-            }
-            .reservasi-info {
-                text-align: center;
-            }
-            .reservasi-info .detail {
-                justify-content: center;
-            }
-
-            .menu-tabs {
-                gap: 0.3rem;
-            }
-            .menu-tabs button {
-                padding: 0.4rem 1rem;
-                font-size: 0.75rem;
-            }
-
-            .reservasi-form .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-resto-content h1 {
-                font-size: 2.2rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .reservasi-form {
-                padding: 1.5rem;
-            }
-            .info-card {
-                padding: 1.5rem;
-            }
-        }
-
-        /* ===== FADE UP ANIMATION ===== */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== BACK TO WEBSITE ===== */
-        .back-link {
+        .footer-premium .back-link {
             display: inline-block;
             margin-top: 0.5rem;
             color: var(--text-muted);
@@ -796,32 +866,148 @@
             text-decoration: none;
             transition: var(--transition);
         }
-        .back-link:hover {
+
+        .footer-premium .back-link:hover {
             color: var(--gold);
         }
-        .back-link i {
-            margin-right: 4px;
+
+        /* ============================================
+                   RESPONSIVE
+                ============================================ */
+        @media (max-width: 1024px) {
+            .hero-premium-grid {
+                gap: 3rem;
+            }
+            .reservasi-wrap-premium {
+                gap: 2.5rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .navbar-premium .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(12, 12, 12, 0.98);
+                backdrop-filter: blur(20px);
+                padding: 2rem 1.5rem;
+                border-radius: 0 0 var(--radius-md) var(--radius-md);
+                border: 1px solid rgba(212, 175, 55, 0.04);
+                gap: 1.5rem;
+            }
+
+            .navbar-premium .nav-links.open {
+                display: flex;
+            }
+
+            .nav-toggle-premium {
+                display: flex;
+            }
+
+            .hero-premium-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-premium-content {
+                max-width: 100%;
+            }
+            .hero-premium-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-premium-content .hero-buttons {
+                justify-content: center;
+            }
+            .hero-premium-image {
+                order: -1;
+            }
+            .hero-premium-image .image-frame {
+                max-width: 100%;
+            }
+
+            .info-grid-premium {
+                grid-template-columns: 1fr;
+            }
+
+            .reservasi-wrap-premium {
+                grid-template-columns: 1fr;
+            }
+            .reservasi-info-premium {
+                text-align: center;
+            }
+            .reservasi-info-premium .detail {
+                justify-content: center;
+            }
+
+            .reservasi-form-premium .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-grid-premium {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid-premium {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-premium-content h1 {
+                font-size: 2.4rem;
+            }
+
+            .reservasi-form-premium {
+                padding: 1.8rem;
+            }
+
+            .info-card-premium {
+                padding: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* ============================================
+                   FADE UP ANIMATION
+                ============================================ */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
 
 <body>
 
-    <!-- ===== NAVBAR DEMO ===== -->
-    <nav class="navbar-demo" id="navbarDemo">
+    <!-- ===== NAVBAR PREMIUM ===== -->
+    <nav class="navbar-premium" id="navbarPremium">
         <div class="container">
             <a href="#" class="logo">Kita<span>Rasa</span></a>
 
-            <ul class="nav-links" id="navLinksDemo">
+            <ul class="nav-links" id="navLinksPremium">
                 <li><a href="#menu">Menu</a></li>
                 <li><a href="#info">Lokasi</a></li>
                 <li><a href="#testimoni">Testimoni</a></li>
                 <li><a href="#reservasi" class="btn-nav">Reservasi</a></li>
-                <!-- Tautan kembali ke WebKita -->
-                <li><a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke WebKita</a></li>
+                <li><a href="index.html" style="font-size:0.75rem; opacity:0.6;">
+                        <i class="fas fa-arrow-left"></i> WebKita
+                    </a></li>
             </ul>
 
-            <button class="nav-toggle-demo" id="navToggleDemo" aria-label="Toggle navigation">
+            <button class="nav-toggle-premium" id="navTogglePremium" aria-label="Toggle navigation">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -829,122 +1015,121 @@
         </div>
     </nav>
 
-    <!-- ===== HERO ===== -->
-    <section class="hero-resto" id="home">
+    <!-- ===== HERO PREMIUM ===== -->
+    <section class="hero-premium" id="home">
         <div class="container">
-            <div class="hero-resto-grid">
-                <div class="hero-resto-content">
-                    <span class="badge"><i class="fas fa-star"></i> California's Finest</span>
+            <div class="hero-premium-grid">
+                <div class="hero-premium-content">
+                    <span class="badge"><i class="fas fa-star"></i> Fine Dining · Est. 2020</span>
                     <h1 class="heading-serif">
-                        The best food <br /><span class="highlight">experience</span> in California
+                        The <span class="highlight">Art</span> of<br />Fine Dining
                     </h1>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing eli ut drak
-                        atempus sit euismod aliquet nec atyu mi a neque.
+                        Experience an exquisite culinary journey where every dish tells a story.
+                        Crafted with passion, served with elegance.
                     </p>
                     <div class="hero-buttons">
-                        <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i> Browse Menu</a>
-                        <a href="#reservasi" class="btn-outline"><i class="fas fa-calendar-check"></i> Reservasi</a>
+                        <a href="#menu" class="btn-primary"><i class="fas fa-utensils"></i> Explore Menu</a>
+                        <a href="#reservasi" class="btn-outline"><i class="fas fa-calendar-check"></i> Reserve Table</a>
                     </div>
                 </div>
 
-                <div class="hero-resto-image">
-                    <div class="image-placeholder">
-                        <i class="fas fa-utensils"></i>
-                        <p>Signature Dish<br /><span style="font-size:0.75rem; color:var(--text-muted);">— coming soon —</span></p>
+                <div class="hero-premium-image">
+                    <div class="image-frame">
+                        <i class="fas fa-plate-wheat"></i>
+                        <p>Signature Degustation</p>
+                        <span class="label-dish">✦ Chef's Selection</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== MENU ===== -->
-    <section class="section-menu" id="menu">
+    <!-- ===== MENU PREMIUM ===== -->
+    <section class="section-menu-premium" id="menu">
         <div class="container text-center">
             <span class="section-tag">Our Menu</span>
-            <h2 class="section-title heading-serif">Browse our menu</h2>
+            <h2 class="section-title heading-serif">Curated for <span class="gold-gradient">Connoisseurs</span></h2>
             <p class="section-subtitle">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit et diam eu semper auctor metus.
+                A selection of refined dishes, each crafted with the finest ingredients.
             </p>
 
-            <!-- Tabs -->
-            <div class="menu-tabs" id="menuTabs">
+            <div class="menu-tabs-premium" id="menuTabsPremium">
                 <button class="active" data-category="all">All</button>
                 <button data-category="starters">Starters</button>
-                <button data-category="main">Main Courses</button>
-                <button data-category="dessert">Desserts</button>
+                <button data-category="main">Main</button>
+                <button data-category="dessert">Dessert</button>
                 <button data-category="drinks">Drinks</button>
             </div>
 
-            <!-- Menu Items -->
-            <div class="menu-grid" id="menuGrid">
-                <!-- Items akan diisi JavaScript -->
+            <div class="menu-grid-premium" id="menuGridPremium">
+                <!-- diisi JS -->
             </div>
         </div>
     </section>
 
-    <!-- ===== INFO (Lokasi & Jam) ===== -->
-    <section class="section-info" id="info">
+    <!-- ===== INFO PREMIUM ===== -->
+    <section class="section-info-premium" id="info">
         <div class="container">
-            <div class="info-grid">
-                <div class="info-card fade-up">
+            <div class="info-grid-premium">
+                <div class="info-card-premium fade-up">
                     <div class="card-icon"><i class="fas fa-location-dot"></i></div>
-                    <h3 class="heading-serif">Locations</h3>
-                    <p><strong>4600 Rodeo Ln</strong><br />Los Angeles, California, CA</p>
-                    <p style="margin-top: 0.75rem;"><strong>2736 Worden St.</strong><br />San Diego, California, CA</p>
+                    <h3 class="heading-serif">Visit Us</h3>
+                    <p><strong>4600 Rodeo Ln</strong><br />Los Angeles, CA 90210</p>
+                    <p style="margin-top: 0.75rem;"><strong>2736 Worden St.</strong><br />San Diego, CA 92103</p>
                 </div>
 
-                <div class="info-card fade-up">
+                <div class="info-card-premium fade-up">
                     <div class="card-icon"><i class="far fa-clock"></i></div>
-                    <h3 class="heading-serif">Open Hours</h3>
+                    <h3 class="heading-serif">Opening Hours</h3>
                     <div class="hours-grid">
                         <span class="day">Mon – Fri</span>
-                        <span class="time">9 AM – 8 PM</span>
+                        <span class="time">5 PM – 11 PM</span>
                         <span class="day">Saturday</span>
-                        <span class="time gold">10 AM – 11 PM</span>
+                        <span class="time gold">5 PM – 12 AM</span>
                         <span class="day">Sunday</span>
-                        <span class="time gold">10 AM – 10 PM</span>
+                        <span class="time gold">5 PM – 10 PM</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== TESTIMONI ===== -->
-    <section class="section-testimoni" id="testimoni">
+    <!-- ===== TESTIMONI PREMIUM ===== -->
+    <section class="section-testimoni-premium" id="testimoni">
         <div class="container text-center">
             <span class="section-tag"><i class="fas fa-quote-left"></i> Testimonials</span>
-            <h2 class="section-title heading-serif">What our guests say</h2>
-            <p class="section-subtitle">Real reviews from real people.</p>
+            <h2 class="section-title heading-serif">What Our <span class="gold-gradient">Guests Say</span></h2>
+            <p class="section-subtitle">Words from those who have savored the experience.</p>
 
-            <div class="testimoni-grid">
-                <div class="testimoni-card fade-up">
+            <div class="testimoni-grid-premium">
+                <div class="testimoni-card-premium fade-up">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <blockquote>“The best restaurant! The atmosphere and food were incredible.”</blockquote>
-                    <div class="author">Sophie Moore <span>· Los Angeles, CA</span></div>
+                    <blockquote>“An unforgettable evening. The service and flavors were impeccable.”</blockquote>
+                    <div class="author">Sophie Moore <span>· Los Angeles</span></div>
                 </div>
-                <div class="testimoni-card fade-up">
+                <div class="testimoni-card-premium fade-up">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <blockquote>“Simply delicious. Every dish was perfectly prepared.”</blockquote>
-                    <div class="author">Matt Cannon <span>· San Diego, CA</span></div>
+                    <blockquote>“Every dish was a masterpiece. This is my new favorite restaurant.”</blockquote>
+                    <div class="author">Matt Cannon <span>· San Diego</span></div>
                 </div>
-                <div class="testimoni-card fade-up">
+                <div class="testimoni-card-premium fade-up">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <blockquote>“One of a kind restaurant. I'll definitely come back.”</blockquote>
-                    <div class="author">Andy Smith <span>· San Francisco, CA</span></div>
+                    <blockquote>“The attention to detail is extraordinary. Highly recommend.”</blockquote>
+                    <div class="author">Andy Smith <span>· San Francisco</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== RESERVASI ===== -->
-    <section class="section-reservasi" id="reservasi">
+    <!-- ===== RESERVASI PREMIUM ===== -->
+    <section class="section-reservasi-premium" id="reservasi">
         <div class="container">
-            <div class="reservasi-wrap">
-                <div class="reservasi-info fade-up">
-                    <span class="section-tag">Reservasi</span>
-                    <h3 class="heading-serif">Book your table</h3>
-                    <p>Reserve now and enjoy an unforgettable culinary experience.</p>
+            <div class="reservasi-wrap-premium">
+                <div class="reservasi-info-premium fade-up">
+                    <span class="section-tag">Reservations</span>
+                    <h3 class="heading-serif">Secure Your <span class="gold-gradient">Table</span></h3>
+                    <p>Book in advance to ensure an exquisite dining experience.</p>
 
                     <div class="detail">
                         <i class="fas fa-phone"></i>
@@ -952,7 +1137,7 @@
                     </div>
                     <div class="detail">
                         <i class="fas fa-envelope"></i>
-                        <span>reservasi@kitarasa.com</span>
+                        <span>reserve@kitarasa.com</span>
                     </div>
                     <div class="detail">
                         <i class="fas fa-location-dot"></i>
@@ -960,164 +1145,165 @@
                     </div>
                 </div>
 
-                <div class="reservasi-form fade-up">
-                    <form id="reservasiForm" novalidate>
+                <div class="reservasi-form-premium fade-up">
+                    <form id="reservasiFormPremium" novalidate>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="resName">Nama</label>
-                                <input type="text" id="resName" placeholder="Nama Anda" required />
+                                <label for="resNamePremium">Full Name</label>
+                                <input type="text" id="resNamePremium" placeholder="Your name" required />
                             </div>
                             <div class="form-group">
-                                <label for="resEmail">Email</label>
-                                <input type="email" id="resEmail" placeholder="email@contoh.com" required />
+                                <label for="resEmailPremium">Email</label>
+                                <input type="email" id="resEmailPremium" placeholder="you@example.com" required />
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="resDate">Tanggal</label>
-                                <input type="date" id="resDate" required />
+                                <label for="resDatePremium">Date</label>
+                                <input type="date" id="resDatePremium" required />
                             </div>
                             <div class="form-group">
-                                <label for="resTime">Jam</label>
-                                <select id="resTime">
-                                    <option value="18:00">18:00</option>
+                                <label for="resTimePremium">Time</label>
+                                <select id="resTimePremium">
+                                    <option value="17:00">17:00</option>
+                                    <option value="17:30">17:30</option>
+                                    <option value="18:00" selected>18:00</option>
                                     <option value="18:30">18:30</option>
                                     <option value="19:00">19:00</option>
                                     <option value="19:30">19:30</option>
                                     <option value="20:00">20:00</option>
+                                    <option value="20:30">20:30</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="resPeople">Jumlah Orang</label>
-                            <select id="resPeople">
-                                <option value="1">1 orang</option>
-                                <option value="2" selected>2 orang</option>
-                                <option value="3">3 orang</option>
-                                <option value="4">4 orang</option>
-                                <option value="5">5 orang</option>
-                                <option value="6+">6+ orang</option>
+                            <label for="resPeoplePremium">Guests</label>
+                            <select id="resPeoplePremium">
+                                <option value="1">1 guest</option>
+                                <option value="2" selected>2 guests</option>
+                                <option value="3">3 guests</option>
+                                <option value="4">4 guests</option>
+                                <option value="5">5 guests</option>
+                                <option value="6+">6+ guests</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="resNotes">Catatan (opsional)</label>
-                            <textarea id="resNotes" placeholder="Permintaan khusus, alergi, dll."></textarea>
+                            <label for="resNotesPremium">Special Requests (optional)</label>
+                            <textarea id="resNotesPremium" placeholder="Dietary restrictions, celebrations, etc."></textarea>
                         </div>
-                        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
-                            <i class="fas fa-calendar-check"></i> Reservasi Sekarang
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-calendar-check"></i> Reserve Now
                         </button>
-                        <div id="resSuccess" style="display:none; margin-top:1rem; color:var(--gold); text-align:center;">
-                            <i class="fas fa-check-circle"></i> Reservasi berhasil! Kami akan konfirmasi segera.
-                        </div>
+                        <div id="resSuccessPremium">✓ Reservation confirmed! We'll see you soon.</div>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer-demo">
+    <!-- ===== FOOTER PREMIUM ===== -->
+    <footer class="footer-premium">
         <div class="container">
             <div class="logo-foot">Kita<span>Rasa</span></div>
-            <p>The best food experience in California.</p>
+            <p>Elevating the art of dining.</p>
             <div class="socials">
                 <a href="#"><i class="fab fa-instagram"></i></a>
                 <a href="#"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-youtube"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
             </div>
-            <p style="font-size:0.75rem; opacity:0.4;">&copy; 2026 KitaRasa — Demo Restoran by WebKita</p>
-            <a href="index.html" style="color:var(--text-muted); font-size:0.8rem; text-decoration:none;">
-                <i class="fas fa-arrow-left"></i> Kembali ke WebKita
+            <p style="font-size:0.75rem; opacity:0.4;">&copy; 2026 KitaRasa — A WebKita Demo</p>
+            <a href="index.html" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to WebKita
             </a>
         </div>
     </footer>
 
     <!-- ============================================
-    JAVASCRIPT
+    JAVASCRIPT (Premium)
     ============================================ -->
     <script>
         // ============================================
-        // 1. DATA MENU
+        // 1. MENU DATA (Premium)
         // ============================================
-        const menuData = [{
+        const menuDataPremium = [{
             id: 1,
-            name: 'Truffle Mushroom Risotto',
-            desc: 'Creamy arborio rice with wild mushrooms and truffle oil.',
-            price: '$24',
+            name: 'Truffle & Mushroom Risotto',
+            desc: 'Creamy arborio rice with wild mushrooms, truffle oil, and parmesan.',
+            price: '$28',
             category: 'main',
-            tag: '⭐ Chef\'s Special'
+            tag: '✦ Chef\'s Signature'
         }, {
             id: 2,
-            name: 'Burrata Salad',
-            desc: 'Fresh burrata with heirloom tomatoes, basil, and balsamic glaze.',
-            price: '$16',
+            name: 'Burrata with Heirloom Tomatoes',
+            desc: 'Creamy burrata, seasonal tomatoes, basil, and aged balsamic.',
+            price: '$18',
             category: 'starters',
-            tag: 'Vegetarian'
+            tag: '🌿 Vegetarian'
         }, {
             id: 3,
-            name: 'Grilled Ribeye Steak',
-            desc: 'Aged ribeye with herb butter, served with roasted vegetables.',
-            price: '$42',
+            name: 'Wagyu Ribeye Steak',
+            desc: 'A5 Wagyu ribeye, herb butter, truffle fries, and grilled asparagus.',
+            price: '$65',
             category: 'main',
-            tag: '🥩 Signature'
+            tag: '🔥 Premium Cut'
         }, {
             id: 4,
-            name: 'Lava Chocolate Cake',
-            desc: 'Warm chocolate cake with molten center, vanilla ice cream.',
-            price: '$14',
+            name: 'Molten Chocolate Lava Cake',
+            desc: 'Warm chocolate cake with a liquid core, vanilla bean ice cream.',
+            price: '$16',
             category: 'dessert',
-            tag: '🔥 Best Seller'
+            tag: '★ Best Seller'
         }, {
             id: 5,
             name: 'Crispy Calamari',
-            desc: 'Lightly fried calamari with spicy aioli and lemon.',
-            price: '$18',
+            desc: 'Lightly fried calamari with garlic aioli and lemon zest.',
+            price: '$20',
             category: 'starters',
-            tag: 'Shareable'
+            tag: '🍋 Shareable'
         }, {
             id: 6,
-            name: 'Lemon Herb Salmon',
-            desc: 'Pan-seared salmon with lemon butter sauce and asparagus.',
-            price: '$34',
+            name: 'Pan-Seared King Salmon',
+            desc: 'Wild salmon with lemon beurre blanc, served with seasonal vegetables.',
+            price: '$38',
             category: 'main',
-            tag: 'Gluten-free'
+            tag: '🐟 Sustainable'
         }, {
             id: 7,
-            name: 'Tiramisu',
-            desc: 'Classic Italian tiramisu with espresso and mascarpone.',
-            price: '$12',
+            name: 'Classic Tiramisu',
+            desc: 'Coffee-soaked ladyfingers, mascarpone cream, and cocoa dust.',
+            price: '$14',
             category: 'dessert',
-            tag: '🇮🇹 Authentic'
+            tag: '🇮🇹 Traditional'
         }, {
             id: 8,
             name: 'Espresso Martini',
-            desc: 'Vodka, coffee liqueur, and fresh espresso.',
-            price: '$15',
+            desc: 'Vodka, coffee liqueur, and freshly brewed espresso.',
+            price: '$18',
             category: 'drinks',
             tag: '🍸 Cocktail'
         }, {
             id: 9,
-            name: 'Fresh Lemonade',
-            desc: 'Hand-squeezed lemons with a hint of mint.',
-            price: '$8',
-            category: 'drinks',
-            tag: 'Refreshing'
+            name: 'Artisanal Cheese Board',
+            desc: 'Selection of aged cheeses, honey, nuts, and house-made crackers.',
+            price: '$24',
+            category: 'starters',
+            tag: '🧀 Premium'
         }];
 
         // ============================================
         // 2. RENDER MENU
         // ============================================
-        const menuGrid = document.getElementById('menuGrid');
-        const tabs = document.querySelectorAll('.menu-tabs button');
+        const menuGridPremium = document.getElementById('menuGridPremium');
+        const tabsPremium = document.querySelectorAll('.menu-tabs-premium button');
 
-        function renderMenu(category = 'all') {
+        function renderMenuPremium(category = 'all') {
             const filtered = category === 'all' ?
-                menuData :
-                menuData.filter(item => item.category === category);
+                menuDataPremium :
+                menuDataPremium.filter(item => item.category === category);
 
-            menuGrid.innerHTML = filtered.map(item => `
-                        <div class="menu-item-card">
+            menuGridPremium.innerHTML = filtered.map(item => `
+                        <div class="menu-item-premium">
                             <div class="item-header">
                                 <span class="item-name">${item.name}</span>
                                 <span class="item-price">${item.price}</span>
@@ -1128,41 +1314,39 @@
                     `).join('');
         }
 
-        // Tab click
-        tabs.forEach(tab => {
+        tabsPremium.forEach(tab => {
             tab.addEventListener('click', () => {
-                tabs.forEach(t => t.classList.remove('active'));
+                tabsPremium.forEach(t => t.classList.remove('active'));
                 tab.classList.add('active');
-                renderMenu(tab.dataset.category);
+                renderMenuPremium(tab.dataset.category);
             });
         });
 
-        // Render awal
-        renderMenu('all');
+        renderMenuPremium('all');
 
         // ============================================
-        // 3. MOBILE NAV TOGGLE
+        // 3. MOBILE NAV
         // ============================================
-        const toggleDemo = document.getElementById('navToggleDemo');
-        const linksDemo = document.getElementById('navLinksDemo');
+        const togglePremium = document.getElementById('navTogglePremium');
+        const linksPremium = document.getElementById('navLinksPremium');
 
-        toggleDemo.addEventListener('click', () => {
-            toggleDemo.classList.toggle('active');
-            linksDemo.classList.toggle('open');
+        togglePremium.addEventListener('click', () => {
+            togglePremium.classList.toggle('active');
+            linksPremium.classList.toggle('open');
         });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                toggleDemo.classList.remove('active');
-                linksDemo.classList.remove('open');
+                togglePremium.classList.remove('active');
+                linksPremium.classList.remove('open');
             });
         });
 
         // ============================================
-        // 4. SCROLL ANIMATION (FADE UP)
+        // 4. SCROLL ANIMATION
         // ============================================
-        const fadeEls = document.querySelectorAll('.fade-up');
-        const observer = new IntersectionObserver((entries) => {
+        const fadeElsPremium = document.querySelectorAll('.fade-up');
+        const observerPremium = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
@@ -1170,36 +1354,36 @@
             });
         }, { threshold: 0.1 });
 
-        fadeEls.forEach(el => observer.observe(el));
+        fadeElsPremium.forEach(el => observerPremium.observe(el));
 
         // ============================================
         // 5. FORM RESERVASI (simulasi)
         // ============================================
-        const resForm = document.getElementById('reservasiForm');
-        const resSuccess = document.getElementById('resSuccess');
+        const resFormPremium = document.getElementById('reservasiFormPremium');
+        const resSuccessPremium = document.getElementById('resSuccessPremium');
 
-        resForm.addEventListener('submit', (e) => {
+        resFormPremium.addEventListener('submit', (e) => {
             e.preventDefault();
-            resSuccess.style.display = 'block';
-            resForm.reset();
+            resSuccessPremium.classList.add('show');
+            resFormPremium.reset();
             setTimeout(() => {
-                resSuccess.style.display = 'none';
+                resSuccessPremium.classList.remove('show');
             }, 5000);
         });
 
         // ============================================
-        // 6. NAVBAR SCROLL EFFECT
+        // 6. NAVBAR SCROLL
         // ============================================
-        const navbarDemo = document.getElementById('navbarDemo');
+        const navbarPremium = document.getElementById('navbarPremium');
         window.addEventListener('scroll', () => {
             if (window.scrollY > 30) {
-                navbarDemo.style.borderBottomColor = 'rgba(212,163,115,0.15)';
+                navbarPremium.classList.add('scrolled');
             } else {
-                navbarDemo.style.borderBottomColor = 'rgba(212,163,115,0.08)';
+                navbarPremium.classList.remove('scrolled');
             }
         });
 
-        console.log('🍽️ KitaRasa Demo Restoran siap!');
+        console.log('🍽️ KitaRasa — Premium Demo Restoran siap.');
     </script>
 
 </body>
