@@ -1,1 +1,1095 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Toko · WebKita</title>
 
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================
+                   VARIABLES (Ganti di sini untuk tema baru)
+                ============================================ */
+        :root {
+            --primary: #0d9488;
+            --primary-dark: #0f766e;
+            --primary-light: #2dd4bf;
+            --bg-body: #f8fafc;
+            --bg-card: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            --shadow-hover: 0 16px 48px rgba(13, 148, 136, 0.12);
+            --radius: 16px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        section {
+            padding: 40px 0 60px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== UTILITY ===== */
+        .text-center {
+            text-align: center;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .section-sub {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 2rem auto;
+        }
+        .badge {
+            display: inline-block;
+            background: rgba(13, 148, 136, 0.08);
+            color: var(--primary);
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(13, 148, 136, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(13, 148, 136, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            border-radius: 60px;
+            border: 1.5px solid #e2e8f0;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .btn-small {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+        }
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-toko {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            padding: 0.8rem 0;
+        }
+        .navbar-toko .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-toko {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .logo-toko span {
+            color: var(--primary);
+        }
+        .nav-links-toko {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links-toko a {
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+            font-size: 0.9rem;
+            position: relative;
+        }
+        .nav-links-toko a:hover {
+            color: var(--text-dark);
+        }
+        .nav-links-toko a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .nav-links-toko a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Cart icon with badge */
+        .cart-icon {
+            position: relative;
+            font-size: 1.2rem;
+            color: var(--text-dark);
+        }
+        .cart-icon .count {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: var(--primary);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-toggle-toko {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-toggle-toko span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--text-dark);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ===== PRODUCT GRID (Halaman 1) ===== */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.8rem;
+            margin-top: 1rem;
+        }
+        .product-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.2rem 1.2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(13, 148, 136, 0.08);
+        }
+        .product-card .product-img {
+            font-size: 3.5rem;
+            color: var(--primary);
+            opacity: 0.4;
+            margin-bottom: 0.5rem;
+        }
+        .product-card h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .product-card .price {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin: 0.3rem 0 0.8rem;
+        }
+        .product-card .btn-primary {
+            width: 100%;
+            justify-content: center;
+            font-size: 0.85rem;
+            padding: 0.5rem;
+        }
+
+        /* ===== CART PAGE (Halaman 2) ===== */
+        .cart-page {
+            display: none;
+            /* akan ditampilkan via JS */;
+        }
+        .cart-page.active {
+            display: block;
+        }
+        .cart-table-wrap {
+            overflow-x: auto;
+            background: white;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 1rem;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+        .cart-table th {
+            text-align: left;
+            padding: 0.8rem 0.5rem;
+            border-bottom: 2px solid #f1f5f9;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .cart-table td {
+            padding: 0.8rem 0.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            vertical-align: middle;
+        }
+        .cart-table .item-name {
+            font-weight: 500;
+        }
+        .cart-table .item-price {
+            font-weight: 600;
+        }
+        .cart-table .item-qty {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .cart-table .item-qty button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: white;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+        .cart-table .item-qty button:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .cart-table .item-qty span {
+            min-width: 24px;
+            text-align: center;
+            font-weight: 600;
+        }
+        .cart-total {
+            display: flex;
+            justify-content: flex-end;
+            padding: 1.5rem 0.5rem 0;
+            font-size: 1.2rem;
+            font-weight: 700;
+            gap: 2rem;
+            border-top: 2px solid #f1f5f9;
+            margin-top: 0.5rem;
+        }
+        .cart-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+        }
+        .cart-empty i {
+            font-size: 4rem;
+            opacity: 0.2;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        /* ===== CONTACT PAGE (Halaman 3) ===== */
+        .contact-page {
+            display: none;
+        }
+        .contact-page.active {
+            display: block;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .contact-info .detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .contact-info .detail i {
+            width: 24px;
+            color: var(--primary);
+        }
+        .contact-form-toko {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .contact-form-toko .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .contact-form-toko label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+        .contact-form-toko input,
+        .contact-form-toko textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--bg-body);
+        }
+        .contact-form-toko input:focus,
+        .contact-form-toko textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.08);
+        }
+        .contact-form-toko textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form-toko .form-success {
+            display: none;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-align: center;
+            font-weight: 500;
+        }
+        .contact-form-toko .form-success.show {
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-toko {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 2.5rem 0 2rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .footer-toko .logo-foot {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+        }
+        .footer-toko .logo-foot span {
+            color: var(--primary-light);
+        }
+        .footer-toko p {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+        .footer-toko .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.2rem 0;
+        }
+        .footer-toko .socials a {
+            color: rgba(255, 255, 255, 0.4);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .footer-toko .socials a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        .footer-toko .back-link {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        .footer-toko .back-link:hover {
+            color: white;
+        }
+
+        /* ===== PAGE NAVIGATION (tampilkan/sembunyikan) ===== */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .nav-links-toko {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+                border-radius: 0 0 var(--radius) var(--radius);
+            }
+            .nav-links-toko.open {
+                display: flex;
+            }
+            .nav-toggle-toko {
+                display: flex;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+            .cart-table-wrap {
+                padding: 0.5rem;
+            }
+            .cart-table th,
+            .cart-table td {
+                padding: 0.5rem 0.3rem;
+                font-size: 0.85rem;
+            }
+            .cart-table .item-qty button {
+                width: 24px;
+                height: 24px;
+                font-size: 0.8rem;
+            }
+            .cart-total {
+                flex-direction: column;
+                gap: 0.5rem;
+                align-items: flex-end;
+            }
+        }
+        @media (max-width: 480px) {
+            .product-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+            .product-card {
+                padding: 1rem 0.8rem;
+            }
+            .product-card .product-img {
+                font-size: 2.5rem;
+            }
+            .product-card h4 {
+                font-size: 0.9rem;
+            }
+            .product-card .price {
+                font-size: 0.95rem;
+            }
+            .product-card .btn-primary {
+                font-size: 0.75rem;
+                padding: 0.4rem;
+            }
+            .contact-form-toko {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+    NAVBAR
+    ========================================== -->
+    <nav class="navbar-toko" id="navbarToko">
+        <div class="container">
+            <a href="#" class="logo-toko">Toko<span>Kita</span></a>
+
+            <ul class="nav-links-toko" id="navLinksToko">
+                <li><a href="#" class="active" data-page="products">Produk</a></li>
+                <li><a href="#" data-page="cart">Keranjang <span class="cart-icon"><i class="fas fa-shopping-cart"></i><span class="count" id="cartCount">0</span></span></a></li>
+                <li><a href="#" data-page="contact">Kontak</a></li>
+                <li><a href="index.html" style="font-size:0.75rem; opacity:0.5;"><i class="fas fa-arrow-left"></i> WebKita</a></li>
+            </ul>
+
+            <button class="nav-toggle-toko" id="navToggleToko">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+    HALAMAN 1: PRODUK
+    ========================================== -->
+    <section class="page active" id="page-products">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge"><i class="fas fa-store"></i> Koleksi</span>
+                <h2 class="section-title">Produk Kami</h2>
+                <p class="section-sub">Pilih produk favorit Anda. Klik tombol beli untuk menambah ke keranjang.</p>
+            </div>
+
+            <div class="product-grid" id="productGrid">
+                <!-- Produk akan diisi JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    HALAMAN 2: KERANJANG
+    ========================================== -->
+    <section class="page" id="page-cart">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge"><i class="fas fa-shopping-cart"></i> Keranjang</span>
+                <h2 class="section-title">Keranjang Belanja</h2>
+                <p class="section-sub">Tinjau produk yang sudah Anda pilih.</p>
+            </div>
+
+            <div class="cart-table-wrap">
+                <div id="cartContent">
+                    <!-- Akan diisi JavaScript -->
+                </div>
+            </div>
+
+            <div class="cart-actions">
+                <button class="btn-outline" id="clearCartBtn"><i class="fas fa-trash"></i> Kosongkan</button>
+                <a href="#page-products" class="btn-outline" id="continueShopping"><i class="fas fa-arrow-left"></i> Lanjut Belanja</a>
+                <button class="btn-primary" id="checkoutBtn"><i class="fas fa-whatsapp"></i> Checkout via WhatsApp</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    HALAMAN 3: KONTAK
+    ========================================== -->
+    <section class="page" id="page-contact">
+        <div class="container">
+            <div class="text-center">
+                <span class="badge"><i class="fas fa-phone"></i> Hubungi</span>
+                <h2 class="section-title">Kontak Kami</h2>
+                <p class="section-sub">Ada pertanyaan? Silakan hubungi kami.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Kami siap membantu</h3>
+                    <p>Senin–Jumat, 09.00–17.00 WIB</p>
+                    <div class="detail"><i class="fas fa-store"></i> <span>TokoKita, Jl. Raya No. 123, Jakarta</span></div>
+                    <div class="detail"><i class="fas fa-phone"></i> <span>+62 812 3456 7890</span></div>
+                    <div class="detail"><i class="fas fa-envelope"></i> <span>info@tokokita.com</span></div>
+                    <div class="detail"><i class="fab fa-whatsapp"></i> <span>+62 812 3456 7890</span></div>
+                </div>
+
+                <div class="contact-form-toko">
+                    <form id="contactFormToko">
+                        <div class="form-group">
+                            <label for="contactName">Nama</label>
+                            <input type="text" id="contactName" placeholder="Nama Anda" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contactEmail">Email</label>
+                            <input type="email" id="contactEmail" placeholder="email@contoh.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="contactMessage">Pesan</label>
+                            <textarea id="contactMessage" placeholder="Tulis pesan Anda..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                        <div class="form-success" id="contactSuccess">✓ Pesan terkirim! Kami akan merespon segera.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    FOOTER
+    ========================================== -->
+    <footer class="footer-toko">
+        <div class="container">
+            <div class="logo-foot">Toko<span>Kita</span></div>
+            <p>Belanja mudah, aman, dan menyenangkan.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size:0.75rem; opacity:0.3;">&copy; 2026 TokoKita — Demo WebKita</p>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke WebKita</a>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================================
+        // 1. DATA PRODUK
+        // ============================================
+        const products = [{
+            id: 1,
+            name: 'Kaos Polos Premium',
+            price: 99000,
+            icon: 'fa-tshirt',
+            category: 'Fashion'
+        }, {
+            id: 2,
+            name: 'Tas Ransel Travel',
+            price: 149000,
+            icon: 'fa-bag-backpack',
+            category: 'Aksesoris'
+        }, {
+            id: 3,
+            name: 'Jam Tangan Minimalis',
+            price: 199000,
+            icon: 'fa-clock',
+            category: 'Aksesoris'
+        }, {
+            id: 4,
+            name: 'Botol Minum Stainless',
+            price: 79000,
+            icon: 'fa-bottle-water',
+            category: 'Perlengkapan'
+        }, {
+            id: 5,
+            name: 'Dompet Kulit Asli',
+            price: 129000,
+            icon: 'fa-wallet',
+            category: 'Aksesoris'
+        }, {
+            id: 6,
+            name: 'Topi Snapback',
+            price: 89000,
+            icon: 'fa-hat-cowboy',
+            category: 'Fashion'
+        }, {
+            id: 7,
+            name: 'Power Bank 10000mAh',
+            price: 159000,
+            icon: 'fa-battery-full',
+            category: 'Elektronik'
+        }, {
+            id: 8,
+            name: 'Mouse Wireless',
+            price: 69000,
+            icon: 'fa-computer-mouse',
+            category: 'Elektronik'
+        }];
+
+        // ============================================
+        // 2. STATE KERANJANG
+        // ============================================
+        let cart = []; // Array { id, name, price, qty }
+
+        // ============================================
+        // 3. RENDER PRODUK
+        // ============================================
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = products.map(p => `
+                        <div class="product-card" data-id="${p.id}">
+                            <div class="product-img"><i class="fas ${p.icon}"></i></div>
+                            <h4>${p.name}</h4>
+                            <div class="price">Rp ${p.price.toLocaleString('id-ID')}</div>
+                            <button class="btn-primary add-to-cart" data-id="${p.id}">
+                                <i class="fas fa-cart-plus"></i> Beli
+                            </button>
+                        </div>
+                    `).join('');
+
+            // Event listener untuk tombol beli
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const id = parseInt(this.dataset.id);
+                    addToCart(id);
+                });
+            });
+        }
+
+        // ============================================
+        // 4. FUNGSI KERANJANG
+        // ============================================
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const existing = cart.find(item => item.id === productId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+            updateCartUI();
+            showToast(`${product.name} ditambahkan ke keranjang!`);
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function changeQty(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                removeFromCart(productId);
+            } else {
+                updateCartUI();
+            }
+        }
+
+        function clearCart() {
+            if (cart.length === 0) return;
+            if (confirm('Kosongkan semua produk di keranjang?')) {
+                cart = [];
+                updateCartUI();
+                showToast('Keranjang telah dikosongkan.');
+            }
+        }
+
+        function getTotal() {
+            return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+        }
+
+        function getTotalItems() {
+            return cart.reduce((sum, item) => sum + item.qty, 0);
+        }
+
+        // ============================================
+        // 5. UPDATE UI KERANJANG
+        // ============================================
+        function updateCartUI() {
+            // Update badge di navbar
+            const countEl = document.getElementById('cartCount');
+            const totalItems = getTotalItems();
+            countEl.textContent = totalItems;
+
+            // Render tabel keranjang
+            const container = document.getElementById('cartContent');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                            <div class="cart-empty">
+                                <i class="fas fa-shopping-cart"></i>
+                                <h3>Keranjang kosong</h3>
+                                <p style="color: var(--text-muted);">Yuk, tambahkan produk favorit Anda.</p>
+                                <a href="#page-products" class="btn-primary" style="margin-top:1rem; display:inline-flex;">
+                                    <i class="fas fa-arrow-left"></i> Mulai Belanja
+                                </a>
+                            </div>
+                        `;
+                return;
+            }
+
+            let html = `
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Produk</th>
+                                    <th>Harga</th>
+                                    <th>Jumlah</th>
+                                    <th>Subtotal</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `;
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                html += `
+                            <tr>
+                                <td class="item-name">${item.name}</td>
+                                <td class="item-price">Rp ${item.price.toLocaleString('id-ID')}</td>
+                                <td>
+                                    <div class="item-qty">
+                                        <button class="qty-minus" data-id="${item.id}">−</button>
+                                        <span>${item.qty}</span>
+                                        <button class="qty-plus" data-id="${item.id}">+</button>
+                                    </div>
+                                </td>
+                                <td>Rp ${subtotal.toLocaleString('id-ID')}</td>
+                                <td><button class="btn-danger remove-item" data-id="${item.id}">Hapus</button></td>
+                            </tr>
+                        `;
+            });
+
+            html += `
+                            </tbody>
+                        </table>
+                        <div class="cart-total">
+                            <span>Total</span>
+                            <span style="color: var(--primary);">Rp ${getTotal().toLocaleString('id-ID')}</span>
+                        </div>
+                    `;
+
+            container.innerHTML = html;
+
+            // Event listener untuk tombol qty
+            document.querySelectorAll('.qty-plus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeQty(parseInt(this.dataset.id), 1);
+                });
+            });
+            document.querySelectorAll('.qty-minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    changeQty(parseInt(this.dataset.id), -1);
+                });
+            });
+            document.querySelectorAll('.remove-item').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    if (confirm('Hapus produk ini?')) {
+                        removeFromCart(parseInt(this.dataset.id));
+                    }
+                });
+            });
+        }
+
+        // ============================================
+        // 6. TOAST NOTIFIKASI
+        // ============================================
+        function showToast(message) {
+            // Buat elemen toast sederhana
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                        position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%);
+                        background: var(--text-dark); color: white; padding: 0.8rem 2rem;
+                        border-radius: 60px; font-weight: 500; z-index: 999;
+                        box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+                        animation: fadeInUp 0.3s ease;
+                        font-family: 'Inter', sans-serif;
+                        font-size: 0.9rem;
+                        max-width: 90%;
+                        text-align: center;
+                    `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transition = 'opacity 0.3s';
+                setTimeout(() => toast.remove(), 300);
+            }, 2500);
+        }
+
+        // Tambahkan keyframe animasi
+        const styleToast = document.createElement('style');
+        styleToast.textContent = `
+                    @keyframes fadeInUp {
+                        from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+                        to { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    }
+                `;
+        document.head.appendChild(styleToast);
+
+        // ============================================
+        // 7. CHECKOUT VIA WHATSAPP
+        // ============================================
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showToast('Keranjang kosong. Tambahkan produk dulu!');
+                return;
+            }
+
+            // Ganti dengan nomor WhatsApp Anda
+            const WA_NUMBER = '6281234567890';
+
+            let message = 'Halo TokoKita! Saya ingin memesan produk berikut:%0A%0A';
+            cart.forEach(item => {
+                message += `- ${item.name} x${item.qty} = Rp ${(item.price * item.qty).toLocaleString('id-ID')}%0A`;
+            });
+            message += `%0ATotal: Rp ${getTotal().toLocaleString('id-ID')}%0A%0ATolong infokan cara pembayaran dan pengiriman. Terima kasih.`;
+
+            const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
+
+        // ============================================
+        // 8. NAVIGASI HALAMAN
+        // ============================================
+        function navigateTo(pageId) {
+            // Sembunyikan semua halaman
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            // Tampilkan halaman tujuan
+            const target = document.getElementById(pageId);
+            if (target) target.classList.add('active');
+
+            // Update class active pada nav link
+            document.querySelectorAll('.nav-links-toko a[data-page]').forEach(link => {
+                link.classList.toggle('active', link.dataset.page === pageId.replace('page-', ''));
+            });
+
+            // Tutup mobile nav
+            document.getElementById('navLinksToko').classList.remove('open');
+        }
+
+        // Event listener untuk link nav
+        document.querySelectorAll('.nav-links-toko a[data-page]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = this.dataset.page;
+                navigateTo('page-' + page);
+                // Jika ke halaman cart, update UI
+                if (page === 'cart') updateCartUI();
+            });
+        });
+
+        // Tombol "Lanjut Belanja" di cart
+        document.getElementById('continueShopping').addEventListener('click', function(e) {
+            e.preventDefault();
+            navigateTo('page-products');
+        });
+
+        // Tombol kosongkan keranjang
+        document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+
+        // Tombol checkout
+        document.getElementById('checkoutBtn').addEventListener('click', checkoutWhatsApp);
+
+        // ============================================
+        // 9. FORM KONTAK (simulasi)
+        // ============================================
+        document.getElementById('contactFormToko').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const success = document.getElementById('contactSuccess');
+            success.classList.add('show');
+            this.reset();
+            setTimeout(() => success.classList.remove('show'), 4000);
+        });
+
+        // ============================================
+        // 10. MOBILE TOGGLE
+        // ============================================
+        const toggleBtn = document.getElementById('navToggleToko');
+        const navLinks = document.getElementById('navLinksToko');
+        toggleBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // Tutup nav saat link diklik
+        document.querySelectorAll('.nav-links-toko a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // ============================================
+        // 11. INISIALISASI
+        // ============================================
+        renderProducts();
+        updateCartUI();
+
+        // Jika ada hash di URL, buka halaman sesuai (misal #cart)
+        if (window.location.hash) {
+            const hash = window.location.hash.replace('#', '');
+            if (['products', 'cart', 'contact'].includes(hash)) {
+                navigateTo('page-' + hash);
+                if (hash === 'cart') updateCartUI();
+            }
+        }
+
+        console.log('🛒 Demo Toko siap digunakan!');
+        console.log('📦 Produk:', products.length, 'item');
+        console.log('💬 WhatsApp terintegrasi untuk checkout.');
+    </script>
+
+</body>
+</html>
