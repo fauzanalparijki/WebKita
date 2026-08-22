@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo Portofolio · WebKita</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+    <style>
+        /* ============================================
+                   VARIABLES (Ganti di sini untuk tema baru)
+                ============================================ */
+        :root {
+            --primary: #7c3aed;
+            /* Ungu elegan */
+            --primary-light: #a78bfa;
+            --primary-dark: #5b21b6;
+            --bg-body: #faf9fe;
+            --bg-card: #ffffff;
+            --text-dark: #1e1b2e;
+            --text-muted: #6b6a7a;
+            --shadow: 0 8px 30px rgba(124, 58, 237, 0.06);
+            --shadow-hover: 0 16px 48px rgba(124, 58, 237, 0.12);
+            --radius: 20px;
+            --transition: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        section {
+            padding: 80px 0 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        section:nth-child(even) {
+            background: var(--bg-card);
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ===== UTILITY ===== */
+        .text-center {
+            text-align: center;
+        }
+        .section-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--primary);
+            background: rgba(124, 58, 237, 0.06);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 0.75rem;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+        }
+        .section-sub {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.2);
+        }
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.3);
+        }
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 0.8rem 2.2rem;
+            border-radius: 60px;
+            border: 1.5px solid #e2e0e8;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .btn-small {
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar-porto {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+            padding: 0.8rem 0;
+            transition: var(--transition);
+        }
+        .navbar-porto .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo-porto {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .logo-porto span {
+            color: var(--primary);
+        }
+        .nav-links-porto {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+        .nav-links-porto a {
+            font-weight: 500;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links-porto a:hover {
+            color: var(--text-dark);
+        }
+        .nav-links-porto a.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .nav-links-porto a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+        .nav-links-porto .btn-nav {
+            background: var(--primary);
+            color: white;
+            padding: 0.4rem 1.6rem;
+            border-radius: 40px;
+            font-weight: 600;
+        }
+        .nav-links-porto .btn-nav:hover {
+            background: var(--primary-dark);
+            color: white;
+        }
+        .nav-toggle-porto {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .nav-toggle-porto span {
+            width: 28px;
+            height: 2.5px;
+            background: var(--text-dark);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ===== SECTION 1: HERO ===== */
+        .hero-porto {
+            padding-top: 100px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #faf9fe 0%, #f3f0ff 100%);
+        }
+        .hero-porto-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .hero-porto-content .badge {
+            display: inline-block;
+            background: rgba(124, 58, 237, 0.06);
+            color: var(--primary);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .hero-porto-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            line-height: 1.05;
+            margin-bottom: 0.5rem;
+        }
+        .hero-porto-content h1 .highlight {
+            color: var(--primary);
+        }
+        .hero-porto-content .title-role {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+        .hero-porto-content p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 460px;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        .hero-porto-content .socials {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        .hero-porto-content .socials a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .hero-porto-content .socials a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+        .hero-porto-avatar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .avatar-frame {
+            width: 100%;
+            max-width: 380px;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 30px 60px rgba(124, 58, 237, 0.15);
+            position: relative;
+        }
+        .avatar-frame i {
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+        .avatar-frame .ring {
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(124, 58, 237, 0.08);
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+        @keyframes pulse-ring {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.04);
+                opacity: 0.5;
+            }
+        }
+
+        /* ===== SECTION 2: TENTANG ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        .about-text p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.2rem;
+        }
+        .about-text .stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 1.5rem;
+        }
+        .about-text .stats .stat-item {
+            display: flex;
+            flex-direction: column;
+        }
+        .about-text .stats .stat-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .about-text .stats .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .about-image {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            aspect-ratio: 4/3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .about-image i {
+            font-size: 4rem;
+            color: var(--primary);
+            opacity: 0.2;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== SECTION 3: PORTOFOLIO / KARYA ===== */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .portfolio-item {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+            transition: var(--transition);
+        }
+        .portfolio-item:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+        }
+        .portfolio-item .thumb {
+            background: linear-gradient(135deg, #f3f0ff, #ede9fe);
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--primary);
+            opacity: 0.5;
+        }
+        .portfolio-item .info {
+            padding: 1.2rem 1.5rem 1.5rem;
+        }
+        .portfolio-item .info h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+        .portfolio-item .info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .portfolio-item .info .tag {
+            display: inline-block;
+            margin-top: 0.5rem;
+            font-size: 0.65rem;
+            font-weight: 600;
+            background: rgba(124, 58, 237, 0.06);
+            color: var(--primary);
+            padding: 0.15rem 0.8rem;
+            border-radius: 40px;
+        }
+
+        /* ===== SECTION 4: TESTIMONI ===== */
+        .testimoni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 2rem;
+        }
+        .testimoni-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 0, 0, 0.02);
+        }
+        .testimoni-card .stars {
+            color: #fbbf24;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+        }
+        .testimoni-card blockquote {
+            font-style: italic;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+        .testimoni-card .author {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .testimoni-card .author span {
+            font-weight: 400;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        /* ===== SECTION 5: KONTAK ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        .contact-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        .contact-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+        }
+        .contact-info .detail {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.6rem;
+        }
+        .contact-info .detail i {
+            width: 24px;
+            color: var(--primary);
+        }
+        .contact-form-porto {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+        .contact-form-porto .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .contact-form-porto label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-bottom: 0.2rem;
+        }
+        .contact-form-porto input,
+        .contact-form-porto textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #e2e0e8;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: var(--bg-body);
+        }
+        .contact-form-porto input:focus,
+        .contact-form-porto textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.06);
+        }
+        .contact-form-porto textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .contact-form-porto .form-success {
+            display: none;
+            margin-top: 1rem;
+            color: var(--primary);
+            text-align: center;
+            font-weight: 500;
+        }
+        .contact-form-porto .form-success.show {
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer-porto {
+            background: var(--text-dark);
+            color: rgba(255, 255, 255, 0.6);
+            padding: 2.5rem 0 2rem;
+            text-align: center;
+        }
+        .footer-porto .logo-foot {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: white;
+        }
+        .footer-porto .logo-foot span {
+            color: var(--primary-light);
+        }
+        .footer-porto p {
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+        }
+        .footer-porto .socials {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1.2rem 0;
+        }
+        .footer-porto .socials a {
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        .footer-porto .socials a:hover {
+            color: white;
+            transform: translateY(-2px);
+        }
+        .footer-porto .back-link {
+            color: rgba(255, 255, 255, 0.2);
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+        .footer-porto .back-link:hover {
+            color: white;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .nav-links-porto {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                padding: 2rem 1.5rem;
+                gap: 1.5rem;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+                border-radius: 0 0 var(--radius) var(--radius);
+            }
+            .nav-links-porto.open {
+                display: flex;
+            }
+            .nav-toggle-porto {
+                display: flex;
+            }
+            .hero-porto-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-porto-content p {
+                margin: 0 auto 1.5rem;
+            }
+            .hero-porto-content .socials {
+                justify-content: center;
+            }
+            .hero-porto-avatar {
+                order: -1;
+            }
+            .avatar-frame {
+                max-width: 220px;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-text .stats {
+                justify-content: center;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-info {
+                text-align: center;
+            }
+            .contact-info .detail {
+                justify-content: center;
+            }
+            section {
+                padding: 60px 0 40px;
+                min-height: auto;
+            }
+        }
+        @media (max-width: 480px) {
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            .testimoni-grid {
+                grid-template-columns: 1fr;
+            }
+            .avatar-frame i {
+                font-size: 4rem;
+            }
+            .contact-form-porto {
+                padding: 1.5rem;
+            }
+            .hero-porto-content h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* ===== SCROLL ANIMATION ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== ACTIVE NAV LINK ON SCROLL ===== */
+        .section-offset {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==========================================
+    NAVBAR
+    ========================================== -->
+    <nav class="navbar-porto" id="navbarPorto">
+        <div class="container">
+            <a href="#hero" class="logo-porto">Porto<span>Folio</span></a>
+
+            <ul class="nav-links-porto" id="navLinksPorto">
+                <li><a href="#hero" class="active">Beranda</a></li>
+                <li><a href="#about">Tentang</a></li>
+                <li><a href="#portfolio">Karya</a></li>
+                <li><a href="#testimonials">Testimoni</a></li>
+                <li><a href="#contact" class="btn-nav">Kontak</a></li>
+                <li><a href="index.html" style="font-size:0.75rem; opacity:0.5;"><i class="fas fa-arrow-left"></i> WebKita</a></li>
+            </ul>
+
+            <button class="nav-toggle-porto" id="navTogglePorto">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ==========================================
+    SECTION 1: HERO
+    ========================================== -->
+    <section class="hero-porto section-offset" id="hero">
+        <div class="container">
+            <div class="hero-porto-grid">
+                <div class="hero-porto-content fade-up">
+                    <span class="badge"><i class="fas fa-code"></i> Freelancer</span>
+                    <h1>Halo, Saya <span class="highlight">Nama Anda</span></h1>
+                    <div class="title-role">UI/UX Designer &amp; Web Developer</div>
+                    <p>
+                        Saya membantu bisnis dan personal membangun kehadiran digital
+                        yang modern, fungsional, dan berkesan.
+                    </p>
+                    <div class="hero-buttons" style="display:flex; gap:1rem; flex-wrap:wrap;">
+                        <a href="#portfolio" class="btn-primary"><i class="fas fa-eye"></i> Lihat Karya</a>
+                        <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Hubungi</a>
+                    </div>
+                    <div class="socials">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="hero-porto-avatar fade-up">
+                    <div class="avatar-frame">
+                        <div class="ring"></div>
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    SECTION 2: TENTANG
+    ========================================== -->
+    <section class="section-offset" id="about">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="section-tag">Tentang Saya</span>
+                <h2 class="section-title">Membangun dengan <span style="color:var(--primary);">Passion</span></h2>
+                <p class="section-sub">Saya percaya setiap proyek adalah kesempatan untuk menciptakan sesuatu yang berarti.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-text fade-up">
+                    <p>
+                        Saya adalah seorang desainer dan pengembang web dengan pengalaman 3+ tahun
+                        membantu klien dari berbagai industri. Fokus saya adalah menciptakan antarmuka
+                        yang intuitif, estetis, dan responsif.
+                    </p>
+                    <p>
+                        Dengan pendekatan kolaboratif, saya selalu mendengarkan kebutuhan klien
+                        dan menerjemahkannya menjadi solusi digital yang efektif.
+                    </p>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-number">25+</span>
+                            <span class="stat-label">Proyek Selesai</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Kepuasan Klien</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">4.9</span>
+                            <span class="stat-label">Rating</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image fade-up">
+                    <i class="fas fa-laptop-code"></i>
+                    <p style="color:var(--text-muted);">Work from anywhere</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    SECTION 3: PORTOFOLIO / KARYA
+    ========================================== -->
+    <section class="section-offset" id="portfolio" style="background:var(--bg-card);">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="section-tag">Portofolio</span>
+                <h2 class="section-title">Karya <span style="color:var(--primary);">Terbaru</span></h2>
+                <p class="section-sub">Beberapa proyek yang telah saya kerjakan untuk klien.</p>
+            </div>
+            <div class="portfolio-grid">
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-utensils"></i></div>
+                    <div class="info">
+                        <h4>KitaRasa Restoran</h4>
+                        <p>Website restoran modern dengan menu interaktif.</p>
+                        <span class="tag">UI/UX</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-store"></i></div>
+                    <div class="info">
+                        <h4>TokoKita E-Commerce</h4>
+                        <p>Platform belanja sederhana dengan keranjang.</p>
+                        <span class="tag">Web Development</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-mobile-alt"></i></div>
+                    <div class="info">
+                        <h4>Mobile App Design</h4>
+                        <p>Desain UI untuk aplikasi kesehatan mobile.</p>
+                        <span class="tag">UI Design</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-brush"></i></div>
+                    <div class="info">
+                        <h4>Brand Identity</h4>
+                        <p>Identitas visual untuk startup teknologi.</p>
+                        <span class="tag">Branding</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-chart-line"></i></div>
+                    <div class="info">
+                        <h4>Dashboard Analitik</h4>
+                        <p>Dashboard interaktif untuk monitoring data.</p>
+                        <span class="tag">Data Visualization</span>
+                    </div>
+                </div>
+                <div class="portfolio-item fade-up">
+                    <div class="thumb"><i class="fas fa-camera"></i></div>
+                    <div class="info">
+                        <h4>Portfolio Photography</h4>
+                        <p>Galeri portofolio untuk fotografer profesional.</p>
+                        <span class="tag">Web Design</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    SECTION 4: TESTIMONI
+    ========================================== -->
+    <section class="section-offset" id="testimonials">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="section-tag"><i class="fas fa-quote-left"></i> Testimoni</span>
+                <h2 class="section-title">Apa Kata <span style="color:var(--primary);">Klien</span></h2>
+                <p class="section-sub">Pengalaman mereka bekerja sama dengan saya.</p>
+            </div>
+            <div class="testimoni-grid">
+                <div class="testimoni-card fade-up">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>“Hasilnya melebihi ekspektasi! Desainnya modern dan sangat responsif. Terima kasih!”</blockquote>
+                    <div class="author">Putri <span>· Pemilik Kafe</span></div>
+                </div>
+                <div class="testimoni-card fade-up">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>“Komunikasi lancar, pengerjaan cepat. Website kami jadi lebih profesional.”</blockquote>
+                    <div class="author">Rizky <span>· Ketua Komunitas</span></div>
+                </div>
+                <div class="testimoni-card fade-up">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <blockquote>“Sangat merekomendasikan! Detail dan kreativitasnya luar biasa.”</blockquote>
+                    <div class="author">Andi <span>· Freelancer</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    SECTION 5: KONTAK
+    ========================================== -->
+    <section class="section-offset" id="contact" style="background:var(--bg-card);">
+        <div class="container">
+            <div class="text-center fade-up">
+                <span class="section-tag">Kontak</span>
+                <h2 class="section-title">Mari <span style="color:var(--primary);">Berkolaborasi</span></h2>
+                <p class="section-sub">Punya proyek atau ide? Saya siap membantu.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-info fade-up">
+                    <h3>Hubungi Saya</h3>
+                    <p>Senin–Jumat, 09.00–17.00 WIB</p>
+                    <div class="detail"><i class="fas fa-map-pin"></i> <span>Jakarta, Indonesia</span></div>
+                    <div class="detail"><i class="fas fa-phone"></i> <span>+62 812 3456 7890</span></div>
+                    <div class="detail"><i class="fas fa-envelope"></i> <span>hello@namamu.com</span></div>
+                    <div class="detail"><i class="fab fa-whatsapp"></i> <span>+62 812 3456 7890</span></div>
+                    <div style="margin-top:1.5rem;">
+                        <a href="#" class="btn-primary"><i class="fab fa-whatsapp"></i> Chat via WhatsApp</a>
+                    </div>
+                </div>
+
+                <div class="contact-form-porto fade-up">
+                    <form id="contactFormPorto">
+                        <div class="form-group">
+                            <label for="portoName">Nama</label>
+                            <input type="text" id="portoName" placeholder="Nama Anda" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="portoEmail">Email</label>
+                            <input type="email" id="portoEmail" placeholder="email@contoh.com" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="portoMessage">Pesan</label>
+                            <textarea id="portoMessage" placeholder="Ceritakan ide atau kebutuhan Anda..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                            <i class="fas fa-paper-plane"></i> Kirim Pesan
+                        </button>
+                        <div class="form-success" id="portoSuccess">✓ Pesan terkirim! Saya akan merespon segera.</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+    FOOTER
+    ========================================== -->
+    <footer class="footer-porto">
+        <div class="container">
+            <div class="logo-foot">Porto<span>Folio</span></div>
+            <p>Membangun solusi digital yang bermakna.</p>
+            <div class="socials">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p style="font-size:0.75rem; opacity:0.3;">&copy; 2026 Nama Anda — Demo WebKita</p>
+            <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> Kembali ke WebKita</a>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+    JAVASCRIPT
+    ========================================== -->
+    <script>
+        // ============================================
+        // 1. MOBILE NAV TOGGLE
+        // ============================================
+        const togglePorto = document.getElementById('navTogglePorto');
+        const navLinksPorto = document.getElementById('navLinksPorto');
+
+        togglePorto.addEventListener('click', () => {
+            navLinksPorto.classList.toggle('open');
+        });
+
+        document.querySelectorAll('.nav-links-porto a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinksPorto.classList.remove('open');
+            });
+        });
+
+        // ============================================
+        // 2. SCROLL ANIMATION (FADE UP)
+        // ============================================
+        const fadeElements = document.querySelectorAll('.fade-up');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        fadeElements.forEach(el => observer.observe(el));
+
+        // ============================================
+        // 3. ACTIVE NAV LINK ON SCROLL
+        // ============================================
+        const sections = document.querySelectorAll('.section-offset');
+        const navLinks = document.querySelectorAll('.nav-links-porto a:not(.btn-nav)');
+
+        function updateActiveLink() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        window.addEventListener('load', updateActiveLink);
+
+        // ============================================
+        // 4. FORM KONTAK (simulasi)
+        // ============================================
+        const formPorto = document.getElementById('contactFormPorto');
+        const successPorto = document.getElementById('portoSuccess');
+
+        formPorto.addEventListener('submit', function(e) {
+            e.preventDefault();
+            successPorto.classList.add('show');
+            this.reset();
+            setTimeout(() => {
+                successPorto.classList.remove('show');
+            }, 4000);
+        });
+
+        // ============================================
+        // 5. NAVBAR BLUR EFFECT ON SCROLL
+        // ============================================
+        const navbarPorto = document.getElementById('navbarPorto');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 20) {
+                navbarPorto.style.borderBottomColor = 'rgba(0,0,0,0.04)';
+                navbarPorto.style.boxShadow = '0 4px 30px rgba(0,0,0,0.02)';
+            } else {
+                navbarPorto.style.borderBottomColor = 'rgba(0,0,0,0.03)';
+                navbarPorto.style.boxShadow = 'none';
+            }
+        });
+
+        console.log('🧑‍💻 Demo Portofolio siap digunakan!');
+        console.log('📌 5 section: Hero, About, Portfolio, Testimonials, Contact.');
+    </script>
+
+</body>
+</html>
