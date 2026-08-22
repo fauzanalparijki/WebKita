@@ -1513,53 +1513,153 @@
     <!-- ============================================
     KONTAK (Form with validation - B)
     ============================================ -->
-    <section class="section-contact" id="contact">
-        <div class="container">
-            <div class="contact-wrap">
-                <div class="contact-info fade-up">
-                    <span class="section-tag">Hubungi</span>
-                    <h3>Punya ide website?</h3>
-                    <p>Ceritakan kebutuhanmu. Kita bahas dulu sebelum mulai pengerjaan.</p>
+  <!-- ===== KONTAK SECTION ===== -->
+<section class="section-contact" id="contact">
+    <div class="container">
+        <div class="contact-wrap">
+            <div class="contact-info fade-up">
+                <span class="section-tag">Hubungi</span>
+                <h3>Punya ide website?</h3>
+                <p>Ceritakan kebutuhanmu. Kita bahas dulu sebelum mulai pengerjaan.</p>
 
-                    <div class="detail">
-                        <i class="fas fa-envelope"></i>
-                        <span>hello@webkita.com</span>
-                    </div>
-                    <div class="detail">
-                        <i class="fas fa-phone"></i>
-                        <span>+62 812 3456 7890</span>
-                    </div>
-                    <div class="detail">
-                        <i class="fas fa-location-dot"></i>
-                        <span>Indonesia (Online)</span>
-                    </div>
+                <div class="detail">
+                    <i class="fas fa-envelope"></i>
+                    <span>hello@webkita.com</span>
                 </div>
-
-                <div class="contact-form fade-up">
-                    <form id="contactForm" novalidate>
-                        <div class="form-group">
-                            <label for="name">Nama Lengkap</label>
-                            <input type="text" id="name" placeholder="Masukkan nama Anda" required />
-                            <div class="error-message" id="nameError">Nama harus diisi.</div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Pesan / Ide Website</label>
-                            <textarea id="message" placeholder="Ceritakan ide atau kebutuhan Anda..." required></textarea>
-                            <div class="error-message" id="messageError">Pesan harus diisi.</div>
-                        </div>
-                       <a href="https://wa.me/6281234567890?text=Halo%20WebKita%2C%20saya%20tertarik%20untuk%20buat%20website." 
-   target="_blank" 
-   class="btn-whatsapp">
-   <i class="fab fa-whatsapp"></i> Chat via WhatsApp
-</a>
-                        <div class="form-success" id="formSuccess">
-                            <i class="fas fa-check-circle"></i> Pesan terkirim! Kami akan hubungi Anda segera.
-                        </div>
-                    </form>
+                <div class="detail">
+                    <i class="fas fa-phone"></i>
+                    <span>+62 812 3456 7890</span>
+                </div>
+                <div class="detail">
+                    <i class="fas fa-location-dot"></i>
+                    <span>Indonesia (Online)</span>
                 </div>
             </div>
+
+            <div class="contact-form fade-up">
+                <!-- FORM dengan ID "waForm" -->
+                <form id="waForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <input type="text" id="name" placeholder="Masukkan nama Anda" required />
+                        <div class="error-message" id="nameError">Nama harus diisi.</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Pesan / Ide Website</label>
+                        <textarea id="message" placeholder="Ceritakan ide atau kebutuhan Anda..." required></textarea>
+                        <div class="error-message" id="messageError">Pesan harus diisi.</div>
+                    </div>
+                    <button type="submit" class="btn-primary" style="width:100%; justify-content:center;">
+                        <i class="fab fa-whatsapp"></i> Kirim via WhatsApp
+                    </button>
+                    <div class="form-success" id="formSuccess">
+                        <i class="fas fa-check-circle"></i> Pesan siap dikirim! WhatsApp akan terbuka.
+                    </div>
+                </form>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- ============================================
+JAVASCRIPT UNTUK WHATSAPP FORM
+============================================ -->
+<script>
+    (function() {
+        // Ganti dengan nomor WhatsApp Anda (pakai kode negara, tanpa "+" atau "0" di awal)
+        const WA_NUMBER = '6281234567890';
+
+        const form = document.getElementById('waForm');
+        const nameInput = document.getElementById('name');
+        const messageInput = document.getElementById('message');
+        const nameError = document.getElementById('nameError');
+        const messageError = document.getElementById('messageError');
+        const successDiv = document.getElementById('formSuccess');
+
+        // Sembunyikan pesan sukses awal
+        successDiv.style.display = 'none';
+
+        // Fungsi validasi sederhana
+        function validateForm() {
+            let valid = true;
+
+            // Reset error
+            nameError.classList.remove('show');
+            messageError.classList.remove('show');
+            nameInput.classList.remove('error');
+            messageInput.classList.remove('error');
+
+            if (nameInput.value.trim() === '') {
+                nameError.classList.add('show');
+                nameInput.classList.add('error');
+                valid = false;
+            }
+
+            if (messageInput.value.trim() === '') {
+                messageError.classList.add('show');
+                messageInput.classList.add('error');
+                valid = false;
+            }
+
+            return valid;
+        }
+
+        // Event submit
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            if (!validateForm()) {
+                return;
+            }
+
+            // Ambil nilai
+            const nama = nameInput.value.trim();
+            const pesan = messageInput.value.trim();
+
+            // Buat pesan WhatsApp
+            const waMessage = `Halo WebKita! Saya *${nama}* ingin konsultasi tentang website.%0A%0A*Ide / kebutuhan saya:*%0A${pesan}%0A%0ATolong infokan lebih lanjut. Terima kasih.`;
+
+            // Encode untuk URL
+            const encodedMessage = encodeURIComponent(waMessage);
+
+            // Buat link WhatsApp
+            const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodedMessage}`;
+
+            // Tampilkan pesan sukses sebentar
+            successDiv.style.display = 'block';
+            successDiv.textContent = '✅ Pesan siap dikirim! WhatsApp akan terbuka.';
+
+            // Reset form setelah 1 detik
+            setTimeout(() => {
+                form.reset();
+                // Sembunyikan sukses setelah 4 detik
+                setTimeout(() => {
+                    successDiv.style.display = 'none';
+                }, 4000);
+            }, 1000);
+
+            // Buka WhatsApp di tab baru (atau langsung di mobile)
+            window.open(waUrl, '_blank');
+        });
+
+        // Hilangkan error saat mengetik
+        nameInput.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                nameError.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        messageInput.addEventListener('input', function() {
+            if (this.value.trim() !== '') {
+                messageError.classList.remove('show');
+                this.classList.remove('error');
+            }
+        });
+
+        console.log('✅ Form WhatsApp siap digunakan!');
+    })();
+</script>
 
     <!-- ============================================
     FOOTER
